@@ -1,4 +1,29 @@
+<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+  <div class="navbar-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
+          <div class="pull-left ">
+            <ul class="userMenu ">
+              <li> <a href="#"> <span class="hidden-xs">HELP</span><i class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a> </li>
+              <li class="phone-number"> <a  href="callto:+8801680531352"> <span> <i class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs" style="margin-left:5px"> 88 01680 53 1352 </span> </a> </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+          <div class="pull-right">
+            <ul class="userMenu">
+              <li> <a href="account-1.html"><span class="hidden-xs"> My Account</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
+              <li> <a href="#"  data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Sign In</span> <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a> </li>
+              <li class="hidden-xs"> <a href="#"  data-toggle="modal" data-target="#ModalSignup"> Create Account </a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="container" data-ng-controller="HeaderController">
+
 	<div class="navbar-header">
 		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
 			<span class="sr-only">Toggle navigation</span>
@@ -8,16 +33,22 @@
 		</button>
 		<a href="/#!/" class="navbar-brand">Node</a>
 	</div>
-	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+	<div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+      	<li> <a href="index.html"> Incio </a> </li>
+      <!--<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">-->
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
-				<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
+				<a href="#" ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
 					<span data-ng-bind="item.title"></span>
 					<b class="caret"></b>
 				</a>
 				<ul ng-switch-when="dropdown" class="dropdown-menu">
-					<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
-						<a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+					<li class="megamenu-content ">
+	              		<ul class="col-lg-3  col-sm-3 col-md-3 unstyled noMarginLeft newCollectionUl">
+							<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
+								<a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 				<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
@@ -54,5 +85,40 @@
 				</ul>
 			</li>
 		</ul>
+            
+    	<div class="search-box static-search pull-right">
+	        <form id="search-form"  role="search" class="navbar-form">
+	        <div class="input-group">
+	            <input type="text" style="padding:6px 6px;"name="movie" ng-model="movie" placeholder="Search..." class="form-control">
+	            <div class="input-group-btn">
+	                <button ng-click="find()" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+	            </div>
+	        </div>
+	        </form>
+	          <!-- /input-group --> 
+        </div>
+
+        <!--/.search-box --> 
+        	</nav>
+
+      </div>
+      <!--/.navbar-nav hidden-xs--> 
+    </div>
+	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
+				<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
+					<span data-ng-bind="item.title"></span>
+					<b class="caret"></b>
+				</a>
+				<ul ng-switch-when="dropdown" class="dropdown-menu">
+					<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
+						<a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+					</li>
+				</ul>
+				<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
+			</li>
+		</ul>
 	</nav>
+
 </div>
