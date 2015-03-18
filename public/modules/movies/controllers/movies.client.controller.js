@@ -9,7 +9,10 @@ angular.module('movies').controller('MoviesController', ['$scope', '$stateParams
 		        movie: $scope.movie
 		    };
 			var movies = MoviesSearch.post({},data).$promise.then(function(movies) {
-      			$scope.movies = movies.results;
+      			$scope.movies              = movies.results;
+				$scope.movies_totalpages   = movies.total_pages;
+				$scope.movies_totalresults = movies.total_results;
+				$scope.page                = movies.page;
     		});
 
 			
@@ -20,7 +23,11 @@ angular.module('movies').controller('MoviesController', ['$scope', '$stateParams
 		$scope.list = function() {
 
 			var movies = Movies.get().$promise.then(function(movies) {
-      			$scope.movies = movies.results;
+					$scope.movies              = movies.results;
+					$scope.movies_totalpages   = movies.total_pages;
+					$scope.movies_totalresults = movies.total_results;
+					$scope.page                = movies.page;
+
     		});
 
 			
